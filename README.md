@@ -25,20 +25,20 @@ As users interact with the UI, this screenshot captures how the landing page res
 The products page lists all the available shoes for sale. Users can browse through the collection, view product details, and add items to their cart.
 
 ### 4. Featured Products
-![Featured Products](https://github.com/Suvansh-DevHub/ShoeStopper/blob/19bbd9194a6a4b9f5952687f7ca5e6cce0943b08/images2/4.png)
+![Featured Products](https://github.com/Suvansh-DevHub/ShoeStopper/blob/main/images2/Fourth.png)
 
 
 This section highlights the most popular and trending shoes available on the website. It aims to grab the user's attention and showcase attractive products.
 
 ### 5. Customer Review
-![Customer Reviews](https://github.com/Suvansh-DevHub/ShoeStopper/blob/19bbd9194a6a4b9f5952687f7ca5e6cce0943b08/images2/5.png)
+![Customer Reviews](https://github.com/Suvansh-DevHub/ShoeStopper/blob/main/images2/Fifth.png)
 
 
 In this section, customers can read and leave reviews for the products they've purchased. It provides a space for sharing feedback and building credibility.
 
 
 ## Deployment Link
-[Nike Shoestopper](https://nikeshoestopeer.netlify.app/)
+[Shoestopper](https://nikeshoestopeer.netlify.app/)
 
 ## Technologies Used
 
