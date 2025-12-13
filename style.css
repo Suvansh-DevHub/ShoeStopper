@@ -565,14 +565,41 @@ header .icons a:hover{
   color:var(--orange);
 }
 
+/* footer-col specific styling */
+.footer-col h2,
+.footer-col h3 {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.footer-logo {
+  font-size: 2.5rem;
+  color: var(--black);
+}
+
+.footer-logo span {
+  color: #0528d6c8;
+}
+
+.footer .footer-col p {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: #666;
+  text-transform: none;
+}
 
 
+.footer .footer-col{
+  margin-left: 7.5rem;
+}
 
+.footer .box-container .box:nth-child(2){
+  margin-left: 17.5rem;
+}
 
-
-
-
-
+.footer .box-container .box:nth-child(3){
+  margin-left: 12.5rem;
+}
 
 
 
@@ -652,3 +679,127 @@ header .icons a:hover{
   }
 
 }
+
+
+
+
+/* toast */
+.site-toast {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 3.2rem;
+  background: rgba(44,44,84,0.97);
+  color: #fff;
+  padding: .9rem 1.4rem;
+  border-radius: .6rem;
+  box-shadow: 0 .6rem 1.6rem rgba(0,0,0,.2);
+  font-size: 1.4rem;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease, bottom .25s ease;
+}
+.site-toast.show {
+  opacity: 1;
+  bottom: 4.8rem;
+  pointer-events: auto;
+}
+/* small success badge in toast */
+.site-toast strong { color: var(--orange); margin-right: .4rem; }
+
+
+
+/* CART MODAL */
+#cart-modal{
+  position: fixed;
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,.5);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:10000;
+}
+
+#cart-modal .cart-box{
+  background:#fff;
+  padding:2rem;
+  width:35rem;
+  border-radius:.5rem;
+  max-height:80vh;
+  overflow-y:auto;
+}
+
+.cart-box h3{
+  font-size:2.2rem;
+  margin-bottom:1rem;
+}
+
+.cart-item{
+  font-size:1.4rem;
+  margin-bottom:.8rem;
+  display:flex;
+  justify-content:space-between;
+}
+
+.cart-total{
+  margin-top:1rem;
+  font-size:1.6rem;
+  font-weight:bold;
+}
+
+
+
+.clear-cart{
+  background:#fff;
+  border:.2rem solid #ff4d4d;
+  color:#ff4d4d;
+}
+
+.clear-cart:hover{
+  background:#ff4d4d;
+  color:#fff;
+}
+
+
+
+.quick-view-modal{
+  position: fixed !important;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.quick-view-box{
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+}
+
+.quick-view-box img{
+  width: 100%;
+  max-height: 260px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.qv-close{
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+
+
+
