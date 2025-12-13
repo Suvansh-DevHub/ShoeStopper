@@ -7,7 +7,7 @@ Welcome to the E-Commerce Shoes Website project! This is a simple website showca
 Here are some screenshots of the different sections of the website:
 
 ### 1. Landing Page
-![Landing Page-1](https://github.com/Suvansh-DevHub/ShoeStopper/blob/main/images2/Screenshot%202025-12-13%20183437.png)
+![Landing Page-1](https://github.com/Suvansh-DevHub/ShoeStopper/blob/main/images2/1.png)
 
 
 The landing page provides an overview of the website's offerings. It includes a hero image and a brief introduction to the brand and its products.
