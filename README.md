@@ -13,13 +13,13 @@ Here are some screenshots of the different sections of the website:
 The landing page provides an overview of the website's offerings. It includes a hero image and a brief introduction to the brand and its products.
 
 ### 2. Landing Page-2 (User Interaction)
-![Landing Page Hover](https://github.com/Suvansh-DevHub/ShoeStopper/blob/19bbd9194a6a4b9f5952687f7ca5e6cce0943b08/images2/2.png)
+![Landing Page Hover](https://github.com/Suvansh-DevHub/ShoeStopper/blob/main/images2/Second.png)
 
 
 As users interact with the UI, this screenshot captures how the landing page responds to their actions. This might include hover effects, animations, or interactive elements.
 
 ### 3. Products Page
-![Products Page](https://github.com/Suvansh-DevHub/ShoeStopper/blob/19bbd9194a6a4b9f5952687f7ca5e6cce0943b08/images2/3.png)
+![Products Page](https://github.com/Suvansh-DevHub/ShoeStopper/blob/main/images2/Third.png)
 
 
 The products page lists all the available shoes for sale. Users can browse through the collection, view product details, and add items to their cart.
