@@ -254,25 +254,107 @@ document.addEventListener('DOMContentLoaded', () => {
     showToast('🧹 Cart cleared');
   });
 
-  /* ================= PRODUCT ICON ACTIONS ================= */
-  document.querySelectorAll('.products .box').forEach(box => {
-    const title = box.querySelector('.content h3')?.innerText || 'Product';
+/* ================= PRODUCT ICON ACTIONS + WISHLIST ================= */
+function getWishlist() {
+  return JSON.parse(localStorage.getItem('wishlist') || '[]');
+}
+function saveWishlist(wl) {
+  localStorage.setItem('wishlist', JSON.stringify(wl));
+}
 
-    box.querySelector('.fa-heart')?.addEventListener('click', e => {
-      e.preventDefault();
-      showToast(`❤️ "${title}" added to wishlist`);
-    });
-
-    box.querySelector('.fa-share')?.addEventListener('click', async e => {
-      e.preventDefault();
-      try {
-        await navigator.clipboard.writeText(window.location.href);
-        showToast('🔗 Product link copied!');
-      } catch {
-        showToast('❌ Copy failed');
-      }
-    });
+function renderWishlist() {
+  const wishlistBox = document.querySelector('.wishlist-items');
+  const wishlistTotalBox = document.querySelector('.wishlist-total');
+  if (!wishlistBox || !wishlistTotalBox) return;
+  wishlistBox.innerHTML = '';
+  let total = 0;
+  const wl = getWishlist();
+  if (!wl.length) {
+    wishlistBox.innerHTML = '<p>Your wishlist is empty.</p>';
+    wishlistTotalBox.innerHTML = '';
+    return;
+  }
+  wl.forEach(item => {
+    const price = Number(item.price) || 0;
+    total += price;
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      <span>${item.title}</span>
+      <span>${price ? ('$' + price.toFixed(2)) : ''}</span>
+    `;
+    wishlistBox.appendChild(div);
   });
+  wishlistTotalBox.innerHTML = `Items: ${wl.length} • Approx total: $${total.toFixed(2)}`;
+}
+
+// attach handlers for each product box
+document.querySelectorAll('.products .box').forEach(box => {
+  const title = box.querySelector('.content h3')?.innerText || 'Product';
+  const imgSrc = box.querySelector('img')?.src || '';
+  // price try from .price or btn[data-price]
+  let price = 0;
+  const priceEl = box.querySelector('.content .price');
+  if (priceEl) {
+    const m = priceEl.innerText.match(/(\d+(\.\d+)?)/);
+    price = m ? parseFloat(m[0]) : 0;
+  } else {
+    const btn = box.querySelector('.btn[data-price]');
+    if (btn && btn.dataset.price) price = parseFloat(btn.dataset.price) || 0;
+  }
+
+  const heart = box.querySelector('.fa-heart');
+  heart?.addEventListener('click', e => {
+    e.preventDefault();
+    const wl = getWishlist();
+    // avoid duplicates by title
+    if (!wl.find(i => i.title === title)) {
+      wl.push({ title, image: imgSrc, price: price || 0 });
+      saveWishlist(wl);
+      showToast(`❤️ "${title}" added to wishlist`);
+    } else {
+      showToast(`ℹ️ "${title}" already in wishlist`);
+    }
+  });
+
+  const share = box.querySelector('.fa-share');
+  share?.addEventListener('click', async e => {
+    e.preventDefault();
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      showToast('🔗 Product link copied!');
+    } catch {
+      showToast('❌ Copy failed');
+    }
+  });
+});
+
+// header wishlist icon open modal
+const wishlistIcon = document.querySelector('.wishlist-icon');
+const wishlistModal = document.getElementById('wishlist-modal');
+const clearWishlistBtn = document.querySelector('.clear-wishlist');
+const closeWishlistBtn = document.querySelector('.close-wishlist');
+
+wishlistIcon && (wishlistIcon.onclick = e => {
+  e.preventDefault();
+  renderWishlist();
+  if (wishlistModal) wishlistModal.style.display = 'flex';
+});
+
+closeWishlistBtn && (closeWishlistBtn.onclick = () => {
+  if (wishlistModal) wishlistModal.style.display = 'none';
+});
+
+wishlistModal && (wishlistModal.onclick = e => {
+  if (e.target === wishlistModal) wishlistModal.style.display = 'none';
+});
+
+clearWishlistBtn && (clearWishlistBtn.onclick = () => {
+  localStorage.removeItem('wishlist');
+  renderWishlist();
+  showToast('🧹 Wishlist cleared');
+});
+
 
   /* ================= QUICK VIEW (EYE ICON) ================= */
   const qvModal = document.getElementById('quick-view-modal');
@@ -313,6 +395,105 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target === qvModal) qvModal.style.display = 'none';
   });
 
+
+/* ================= USER AUTH (MODAL + DROPDOWN) ================= */
+const userIcon = document.querySelector('.user-icon');
+const userWrapper = document.querySelector('.user-wrapper');
+const userModal = document.getElementById('user-modal');
+const userForm = document.getElementById('user-form');
+const closeUserBtn = document.querySelector('.close-user');
+const dropdown = document.querySelector('.user-dropdown');
+const logoutLink = document.querySelector('.user-logout');
+
+function isLoggedIn() {
+  return !!localStorage.getItem('user');
+}
+
+// icon click
+userIcon && (userIcon.onclick = e => {
+  e.preventDefault();
+  if (isLoggedIn()) {
+    dropdown.style.display =
+      dropdown.style.display === 'block' ? 'none' : 'block';
+  } else {
+    userModal.style.display = 'flex';
+  }
+});
+
+// login
+userForm && (userForm.onsubmit = e => {
+  e.preventDefault();
+  const name = document.getElementById('user-name').value.trim();
+  const email = document.getElementById('user-email').value.trim();
+
+  if (!name || !email) {
+    showToast('❌ Please fill all details');
+    return;
+  }
+
+  localStorage.setItem('user', JSON.stringify({ name, email }));
+  showToast(`👋 Welcome, ${name}`);
+  userModal.style.display = 'none';
+  updateUserUI();
+});
+
+// close modal
+closeUserBtn && (closeUserBtn.onclick = () => {
+  userModal.style.display = 'none';
+});
+
+// logout (from dropdown)
+logoutLink && (logoutLink.onclick = e => {
+  e.preventDefault();
+  localStorage.removeItem('user');
+  dropdown.style.display = 'none';
+  showToast('👋 Logged out');
+  updateUserUI();
+});
+
+// click outside → close dropdown
+document.addEventListener('click', e => {
+  if (
+    dropdown &&
+    userWrapper &&
+    !userWrapper.contains(e.target)
+  ) {
+    dropdown.style.display = 'none';
+  }
+});
+
+function updateUserUI() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (!userIcon || !userWrapper) return;
+
+  if (user) {
+    userWrapper.classList.add('logged');
+
+    // avatar pill bana do
+    userIcon.className = 'user-avatar';
+    userIcon.setAttribute('href', '#');
+
+    // 👉 POORA NAAM DIKHANA
+    userIcon.textContent = user.name;
+
+  } else {
+    userWrapper.classList.remove('logged');
+
+    // wapas normal icon
+    userIcon.className = 'fas fa-user user-icon';
+    userIcon.textContent = '';
+  }
+}
+
+
+
+// on load
+updateUserUI();
+
+
+
+
+  
   // initial render sanitize & update (safety)
   renderCart();
 
