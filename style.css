@@ -803,3 +803,238 @@ header .icons a:hover{
 
 
 
+/* WISHLIST uses same layout as cart modal */
+#wishlist-modal{
+  position: fixed;
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,.5);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:10000;
+}
+#wishlist-modal .cart-box{
+  background:#fff;
+  padding:2rem;
+  width:35rem;
+  border-radius:.5rem;
+  max-height:80vh;
+  overflow-y:auto;
+}
+
+
+
+/* ================= USER / PROFILE MODAL ================= */
+#user-modal{
+  position: fixed;
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,.5);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:10000;
+}
+
+#user-modal .cart-box{
+  background:#fff;
+  padding:3rem;
+  width:42rem;
+  border-radius:1.2rem;
+  max-height:85vh;
+  overflow-y:auto;
+}
+
+
+
+/* user modal input fields */
+#user-modal .box{
+  width:100%;
+  font-size:1.6rem;
+  padding:1.2rem;
+  border:.2rem solid var(--black);
+  border-radius:.6rem;
+  margin-bottom:1.4rem;
+  text-transform:none;
+}
+
+
+
+#user-modal .btn{
+  font-size:1.6rem;
+  padding:1rem 2rem;
+}
+
+
+
+#user-modal h3{
+  font-size:2.4rem;
+  margin-bottom:2rem;
+  color:var(--black);
+}
+
+
+
+
+/* ---------- Clean avatar + dropdown fit (paste this, replace earlier avatar/dropdown rules) ---------- */
+
+.user-wrapper{
+  position: relative;
+  display: inline-block;
+  --avatar-h: 3.8rem; /* change this to resize the pill (3.8rem good). Use 4.4rem if you want bigger) */
+  margin: 0; /* ensure wrapper has no extra margin affecting alignment */
+  padding: 0;
+}
+
+/* the pill (register-like) */
+header .icons .user-avatar,
+.user-wrapper .user-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: var(--avatar-h);
+  line-height: var(--avatar-h);
+  padding: 0 1.6rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  background: #2c2c54;
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 .35rem .6rem rgba(0,0,0,0.12);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+/* dropdown that *overlaps* the pill bottom so they appear flush */
+.user-dropdown{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  /* place the top of dropdown exactly half avatar height up, so it visually meets the pill curve */
+top: calc(100% + 6px);   /* 👈 bas itna gap, no overlap */
+
+  z-index: 10020;
+
+  background: #2c2c54;
+  min-width: 12rem;               /* compact width */
+  padding: 0;
+  box-shadow: 0 .6rem 1rem rgba(0,0,0,0.12);
+
+  /* match top corners to pill curvature so they look joined */
+  border-top-left-radius: calc(var(--avatar-h) / 2);
+  border-top-right-radius: calc(var(--avatar-h) / 2);
+  border-bottom-left-radius: .5rem;
+  border-bottom-right-radius: .5rem;
+  overflow: hidden;
+}
+
+
+/* options */
+.user-dropdown a{
+  display: block;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.6rem !important;
+  color: #fff;
+  text-decoration: none;
+    text-align: left;          /* center hatao */
+  padding-left: 2rem !important;     /* 👈 yahan value badhao/ghatao */
+}
+.user-dropdown a + a{
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* hover look */
+.user-dropdown a:hover{
+  background: var(--orange);
+  color: #fff !important;
+}
+
+/* responsive tweak */
+@media (max-width:600px){
+  .user-wrapper{ --avatar-h: 3.4rem; }
+  .user-dropdown{ min-width: 10.8rem; }
+  .user-dropdown a{ font-size: 1.1rem; padding: 0.7rem 1rem; }
+}
+
+
+
+
+
+.user-name{
+  display: none;
+  font-size: 1.6rem;
+  margin-left: .6rem;
+  color: var(--black);
+  font-weight: 600;
+  text-transform: none;
+  cursor: pointer;
+}
+
+
+
+
+.user-wrapper.logged .user-name{
+  display: inline-block;
+}
+
+
+
+/* ===== USER NAME PILL (REGISTER STYLE) ===== */
+header .icons .user-avatar{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 4.4rem;              /* Register jaisa height */
+  padding: 0 2.2rem;        /* left-right space */
+  margin-left: 1.5rem;
+
+  background: #2c2c54;
+  color: #fff;
+
+  border-radius: 999px;        /* pill shape */
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-transform: none;
+
+  white-space: nowrap;         /* name ek line me */
+  cursor: pointer;
+
+  box-shadow: 0 .4rem .8rem rgba(0,0,0,.15);
+}
+
+/* hover optional */
+header .icons .user-avatar:hover{
+  background: var(--orange);
+    color: #fff !important;              /* 👈 YE LINE SABSE IMPORTANT */
+}
+
+/* mobile me thoda chhota */
+@media (max-width:600px){
+  header .icons .user-avatar{
+    height: 3.4rem;
+    font-size: 1.3rem;
+    padding: 0 1.2rem;
+  }
+}
+
+/* USER DROPDOWN FIX */
+.user-dropdown a{
+  color: #fff !important;              /* normal state text white */
+  background: transparent;
+}
+
+
+
+
+
+
+
+
+
