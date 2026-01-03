@@ -1,6 +1,6 @@
-# E-Commerce Shoes Website:
+# ShoeStopper:
 
-Welcome to the E-Commerce Shoes Website project! This is a simple website showcasing a collection of shoes available for purchase. The website is built using HTML, CSS, and JavaScript.
+Welcome to ShoeStopper! This is a simple website showcasing a collection of nike shoes available for purchase. The website is built using HTML, CSS, and JavaScript.
 
 ## Screenshots
 
@@ -45,6 +45,15 @@ In this section, customers can read and leave reviews for the products they've p
 - HTML
 - CSS
 - JavaScript
+- 
+
+## 👨‍💻 Author
+Developed with ❤️ by **Suvansh**  
+🔗 [GitHub](https://github.com/Suvansh-DevHub) · [LinkedIn](https://www.linkedin.com/in/suvansh36/) · [Twitter](https://x.com/Suvansh31)
+
+
+## 📜 License
+This project is licensed under the MIT License 
 
 ## Contact
 
